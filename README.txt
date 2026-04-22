@@ -1,41 +1,149 @@
-# Ambulance QR System (Google Sheets Edition)
+Got it — no emojis, clean, and easy to copy in one go. Here’s a polished, professional README:
 
-This system allows you to manage ambulance data centrally in a Google Sheet. Scanning the QR code points users to a Streamlit web app which dynamically reads the Google Sheet and presents a beautiful UI displaying the ambulance details.
+---
+
+# Ambulance QR System (Google Sheets Powered)
+
+A simple system to manage ambulance data centrally using Google Sheets and display it dynamically through a Streamlit web application.
+
+A single QR code is used. When scanned, it opens a web app that always shows the latest ambulance data. No need to regenerate QR codes after updates.
+
+---
+
+## Overview
+
+This project connects a Google Sheet (as a database) with a Streamlit frontend. The QR code contains a URL that points to the app, which fetches and displays live data.
+
+---
+
+## Key Features
+
+* Single QR code for all ambulance data
+* Real-time updates via Google Sheets
+* No need to regenerate QR codes
+* Simple and modular architecture
+* Mobile-friendly interface
+
+---
 
 ## Project Structure
-- `app/`: Streamlit app and services (Google Sheets processor, qr generator).
-- `config/`: Application settings (Google Sheet URL, Base URL).
-- `data/`: Generated QR codes.
-- `utils/`: Constants.
+
+```
+project-root/
+
+├── app/
+│   ├── streamlitapp.py
+│   └── services/
+│       ├── qrgenerator.py
+│       └── sheets_processor.py
+│
+├── config/
+│   └── settings.py
+│
+├── data/
+│   └── qr/
+│       └── masterqr.png
+│
+├── utils/
+│   └── constants.py
+│
+├── requirements.txt
+└── README.md
+```
+
+---
 
 ## Setup Instructions
 
-1. **Install Requirements:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 1. Install Dependencies
 
-2. **Google Sheet Setup:**
-   - Create a Google Sheet with columns: `Name`, `Number`, `Type`, and `Cost`.
-   - Click "Share" in the top right corner.
-   - Under "General access", change from "Restricted" to "Anyone with the link".
-   - Copy the link.
+```
+pip install -r requirements.txt
+```
 
-3. **Configuration:**
-   - Open `config/settings.py`.
-   - Paste your copied Google Sheet link into the `GOOGLE_SHEET_URL` variable.
+---
 
-4. **Generate QR Code (Only needed once):**
-   ```bash
-   python -m app.services.qrgenerator
-   ```
-   This will generate `data/qr/masterqr.png`.
+### 2. Google Sheet Setup
 
-5. **Run Streamlit App:**
-   ```bash
-   streamlit run app/streamlitapp.py
-   ```
-   *(Keep this terminal running so your app stays online).*
+Create a Google Sheet with the following columns:
 
-6. **Usage:**
-   Scan `data/qr/masterqr.png` with your phone, or open the URL encoded in it. The Streamlit app will pull the latest data from your Google Sheet and display it! You never need to touch the QR code again.
+```
+Name | Number | Type | Cost
+```
+
+Then:
+
+1. Click "Share"
+2. Change access from "Restricted" to "Anyone with the link"
+3. Copy the Google Sheet URL
+
+---
+
+### 3. Configuration
+
+Open:
+
+```
+config/settings.py
+```
+
+Update:
+
+```
+GOOGLE_SHEET_URL = "your_google_sheet_link_here"
+```
+
+---
+
+### 4. Generate QR Code (One-Time Step)
+
+```
+python -m app.services.qrgenerator
+```
+
+This generates:
+
+```
+data/qr/masterqr.png
+```
+
+This QR code does not need to be regenerated after data changes.
+
+---
+
+### 5. Run the Application
+
+```
+streamlit run app/streamlitapp.py
+```
+
+Keep the terminal running while using the app.
+
+---
+
+## Usage
+
+Scan the QR code:
+
+```
+data/qr/masterqr.png
+```
+
+Or open the encoded URL directly.
+
+The app will fetch the latest data from Google Sheets and display all ambulance details.
+
+---
+
+## How It Works
+
+1. QR code contains a URL
+2. User scans the QR code
+3. Streamlit app opens
+4. App fetches live data from Google Sheets
+5. Data is displayed in the UI
+
+
+
+
+
